@@ -150,8 +150,8 @@ def send_data_items(force_sync):
             "last_update": get_time(lastUpdate),
             "provider": "FindMy (muehlt/home-assistant-findmy)"
         }
-
-        client.publish(device_topic + "config", json.dumps(device_config))
+        if not device_update: 
+            client.publish(device_topic + "config", json.dumps(device_config), 0, True)
         client.publish(device_topic + "attributes", json.dumps(device_attributes))
         client.publish(device_topic + "state", location_name)
 
